@@ -3,6 +3,7 @@ from team import Team
 from tkinter import *
 from tkinter import ttk
 from tkinter import filedialog
+import tkinter as tk
 import asyncio, schedule
 
 def new_team():
@@ -11,11 +12,21 @@ def new_team():
 	init_save_path = ""
 
 	def create():
+		def add_player():
+			#  create exporter objects and add to list and add object name to listbox
+			player = Exporter(get_name.get() ,get_email.get(), get_password.get())
+			new_team_listbox.insert(tk.END, player.player_name)
+			get_name.delete(0, 'end')
+			get_email.delete(0, 'end')
+			get_password.delete(0, 'end')
+
+		init_team_exporter_list = []
 		init_team_name = team_name_entry.get()
 		init_incrimentation = team_timer_entry.get()
 
 		create_roster = Toplevel(new_popup)
 		create_roster.title("Create Roster")
+		create_roster.wm_attributes('-topmost', 1)
 		new_team_listbox = Listbox(create_roster)
 		new_team_listbox.pack(side="left", padx=10, pady=10)
 
@@ -31,7 +42,7 @@ def new_team():
 		get_password = ttk.Entry(create_roster)
 		get_password.pack(padx=10)
 
-		ttk.Button(create_roster, text="Add Player").pack(padx=10, pady=10)
+		ttk.Button(create_roster, text="Add Player", command=add_player).pack(padx=10, pady=10)
 		ttk.Button(create_roster, text="Save & Close", command=new_popup.destroy).pack(padx=10, pady=10)
 
 	def set_save_path():
@@ -39,6 +50,7 @@ def new_team():
 		if directory:
 			save_path_label.config(text="Saving to: " + directory)
 			init_save_path = directory
+			new_popup.wm_attributes('-topmost', 1)
 
 	new_popup = Toplevel(root)
 	new_popup.geometry("400x300")

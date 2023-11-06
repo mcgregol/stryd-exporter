@@ -3,10 +3,11 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import time
+import datetime, time
 
 class Exporter:
-	def __init__(self, user_email, user_pass, save_path):
+	def __init__(self, player_name, user_email, user_pass):
+		self.player_name = player_name
 		self.user_email = user_email
 		self.user_pass = user_pass
 		self.date = datetime.date.today()
