@@ -3,15 +3,13 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from getpass import getpass
 import time
 
 class Exporter:
-	def __init__(self, user_email, user_pass, date, save_path):
+	def __init__(self, user_email, user_pass, save_path):
 		self.user_email = user_email
 		self.user_pass = user_pass
-		self.date = date
-		self.save_path = save_path
+		self.date = datetime.date.today()
 
 	def export():
 		#  prep selenium
