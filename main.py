@@ -15,10 +15,13 @@ def edit_team():
 def pause_team():
 	pass
 
+def quit():
+	root.destroy()
+
 #  create window/frame
 root = Tk()
 root.title("Stryd Exporter")
-root.geometry("800x500")
+root.geometry("600x400")
 
 #  title
 ttk.Label(text="Teams:").place(x=90, y=50)
@@ -27,8 +30,12 @@ ttk.Label(text="Teams:").place(x=90, y=50)
 listbox = Listbox()
 listbox.place(x=40, y=80)
 
-#  button to create team
-ttk.Button(text="New", command=new_team).pack(side="right", padx=300)
+#  add buttons
+ttk.Button(text="New", command=new_team).pack(side="top", padx=50, pady=50)
+ttk.Button(text="Edit", command=edit_team).pack(side="top", padx=50)
+ttk.Button(text="Pause", command=pause_team).pack(side="top", padx=50, pady=50)
+ttk.Button(text="Kill", command=kill_team).pack(side="top", padx=50,)
+ttk.Button(text="Quit", command=quit).pack(side="right", padx=50)
 
 #  start gui
 root.mainloop()
