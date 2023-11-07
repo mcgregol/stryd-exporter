@@ -15,6 +15,7 @@ def new_team():
 		def add_player():
 			#  create exporter objects and add to list and add object name to listbox
 			player = Exporter(get_name.get() ,get_email.get(), get_password.get())
+			init_team_exporter_list.append(player)
 			new_team_listbox.insert(tk.END, player.player_name)
 			get_name.delete(0, 'end')
 			get_email.delete(0, 'end')
@@ -27,6 +28,7 @@ def new_team():
 		create_roster = Toplevel(new_popup)
 		create_roster.title("Create Roster")
 		create_roster.wm_attributes('-topmost', 1)
+		ttk.Label(create_roster, text=init_team_name).pack(side="left", padx=10)
 		new_team_listbox = Listbox(create_roster)
 		new_team_listbox.pack(side="left", padx=10, pady=10)
 
@@ -43,7 +45,7 @@ def new_team():
 		get_password.pack(padx=10)
 
 		ttk.Button(create_roster, text="Add Player", command=add_player).pack(padx=10, pady=10)
-		ttk.Button(create_roster, text="Save & Close", command=new_popup.destroy).pack(padx=10, pady=10)
+		ttk.Button(create_roster, text="Save & Close").pack(padx=10, pady=10)
 
 	def set_save_path():
 		directory = filedialog.askdirectory()
