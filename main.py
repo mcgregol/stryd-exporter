@@ -6,6 +6,10 @@ from tkinter import filedialog
 import tkinter as tk
 import asyncio, schedule
 
+#  TODO
+#  - date picker
+#    - date range
+
 def new_team():
 	init_team_name = ""
 	init_incrimentation = 0
