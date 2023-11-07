@@ -45,7 +45,7 @@ def new_team():
 		get_password.pack(padx=10)
 
 		ttk.Button(create_roster, text="Add Player", command=add_player).pack(padx=10, pady=10)
-		ttk.Button(create_roster, text="Save & Close").pack(padx=10, pady=10)
+		ttk.Button(create_roster, text="Save & Close", command=new_popup.destroy).pack(padx=10, pady=10)
 
 	def set_save_path():
 		directory = filedialog.askdirectory()
@@ -55,7 +55,7 @@ def new_team():
 			new_popup.wm_attributes('-topmost', 1)
 
 	new_popup = Toplevel(root)
-	new_popup.geometry("400x300")
+	new_popup.geometry("400x400")
 	new_popup.title("New Team")
 	ttk.Label(new_popup, text="Team name:").pack()
 	team_name_entry = ttk.Entry(new_popup)
@@ -101,11 +101,3 @@ ttk.Button(text="Quit", command=quit).pack(side="right", padx=50)
 
 #  start gui
 root.mainloop()
-
-
-
-
-## TODO
-##  every instance of exporter runs on async timer
-##  create "kill" function
-##  create UI
