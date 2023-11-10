@@ -1,15 +1,10 @@
 from exporter import Exporter
 from team import Team
 from tkinter import *
-from tkinter import ttk
-from tkinter import filedialog, PhotoImage
+from tkinter import ttk, filedialog, PhotoImage, messagebox
 from tkcalendar import Calendar
 import tkinter as tk
 import asyncio, datetime, schedule
-
-#  TODO
-#  - date picker
-#    - date range
 
 def new_team():
 	today = datetime.date.today()
@@ -19,6 +14,14 @@ def new_team():
 	init_save_path = ""
 
 	def create():
+		if team_name_entry.get() in listbox.get(0, tk.END):
+			messagebox.showwarning("Info", "This team name already exists!")
+			return
+			
+		def add_team():
+			listbox.insert(tk.END, init_team_name)
+			new_popup.destroy()
+
 		def add_player():
 			#  create exporter objects and add to list and add object name to listbox
 			player = Exporter(get_name.get() ,get_email.get(), get_password.get())
@@ -52,7 +55,7 @@ def new_team():
 		get_password.pack(padx=10)
 
 		ttk.Button(create_roster, text="Add Player", command=add_player).pack(padx=10, pady=10)
-		ttk.Button(create_roster, text="Save & Close", command=new_popup.destroy).pack(padx=10, pady=10)
+		ttk.Button(create_roster, text="Save & Close", command=add_team).pack(padx=10, pady=10)
 
 	def set_save_path():
 		directory = filedialog.askdirectory()
