@@ -5,8 +5,7 @@ from tkinter import ttk
 from tkinter import filedialog
 from tkcalendar import Calendar
 import tkinter as tk
-import asyncio, schedule
-import datetime
+import asyncio, datetime, schedule
 
 #  TODO
 #  - date picker
