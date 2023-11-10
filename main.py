@@ -2,7 +2,7 @@ from exporter import Exporter
 from team import Team
 from tkinter import *
 from tkinter import ttk
-from tkinter import filedialog
+from tkinter import filedialog, PhotoImage
 from tkcalendar import Calendar
 import tkinter as tk
 import asyncio, datetime, schedule
@@ -115,6 +115,11 @@ ttk.Button(text="Edit", command=edit_team).pack(side="top", padx=50)
 ttk.Button(text="Pause", command=pause_team).pack(side="top", padx=50, pady=50)
 ttk.Button(text="Kill", command=kill_team).pack(side="top", padx=50,)
 ttk.Button(text="Quit", command=quit).pack(side="right", padx=50)
+
+#  add logo
+logo = PhotoImage(file='resized.png')
+logo_label = ttk.Label(image=logo)
+logo_label.pack(side='left', padx=40)
 
 #  start gui
 root.mainloop()
