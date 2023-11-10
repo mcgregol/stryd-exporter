@@ -3,14 +3,18 @@ from team import Team
 from tkinter import *
 from tkinter import ttk
 from tkinter import filedialog
+from tkcalendar import Calendar
 import tkinter as tk
 import asyncio, schedule
+import datetime
 
 #  TODO
 #  - date picker
 #    - date range
 
 def new_team():
+	today = datetime.date.today()
+
 	init_team_name = ""
 	init_incrimentation = 0
 	init_save_path = ""
@@ -27,7 +31,7 @@ def new_team():
 
 		init_team_exporter_list = []
 		init_team_name = team_name_entry.get()
-		init_incrimentation = team_timer_entry.get()
+		#init_incrimentation = team_timer_entry.get()
 
 		create_roster = Toplevel(new_popup)
 		create_roster.title("Create Roster")
@@ -59,18 +63,28 @@ def new_team():
 			new_popup.wm_attributes('-topmost', 1)
 
 	new_popup = Toplevel(root)
-	new_popup.geometry("400x400")
+	new_popup.geometry("900x500")
 	new_popup.title("New Team")
-	ttk.Label(new_popup, text="Team name:").pack()
+	ttk.Label(new_popup, text="Team name:").pack(pady=10)
 	team_name_entry = ttk.Entry(new_popup)
 	team_name_entry.pack()
 	save_path_label = ttk.Label(new_popup, text="Saving to: undefined")
 	save_path_label.pack(pady=10)
-	ttk.Button(new_popup, text="Set save path", command=set_save_path).pack(pady=10)
-	ttk.Label(new_popup, text="Timer incrimentation(hrs):").pack()
-	team_timer_entry = ttk.Entry(new_popup)
-	team_timer_entry.pack()
-	ttk.Button(new_popup, text="Create Team & Roster", command=create).pack(pady=50)
+	ttk.Button(new_popup, text="Set save path", command=set_save_path).pack()
+	#ttk.Label(new_popup, text="Timer incrimentation(hrs):").pack()
+	#team_timer_entry = ttk.Entry(new_popup)
+	ttk.Label(new_popup, text="Set date range:").pack(pady=20)
+	start_cal = Calendar(new_popup, selectmode='day',
+		year=today.year,
+		month=today.month,
+		day=today.day)
+	start_cal.pack(side='left', padx=50)
+	end_cal = Calendar(new_popup, selectmode='day',
+		year=today.year,
+		month=today.month,
+		day=today.day)
+	end_cal.pack(side='right', padx=50)
+	ttk.Button(new_popup, text="Create Team & Roster", command=create).pack(side='bottom', pady=50)
 
 def kill_team():
 	pass
