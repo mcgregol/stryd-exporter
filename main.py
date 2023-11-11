@@ -6,11 +6,15 @@ from tkcalendar import Calendar
 import tkinter as tk
 import asyncio, datetime, schedule
 
+#  empty list to store all our teams
+teams = []
+
 def new_team():
 	today = datetime.date.today()
 
 	init_team_name = ""
-	init_incrimentation = 0
+	init_start_date = ""
+	init_end_date = ""
 	init_save_path = ""
 
 	def create():
@@ -19,8 +23,16 @@ def new_team():
 			return
 			
 		def add_team():
+			team = Team(init_team_name,
+				init_team_exporter_list,
+				init_start_date,
+				init_end_date,
+				init_save_path)
+			teams.append(team)
 			listbox.insert(tk.END, init_team_name)
 			new_popup.destroy()
+			for team in teams:
+				print(team.name)
 
 		def add_player():
 			#  create exporter objects and add to list and add object name to listbox
@@ -40,7 +52,8 @@ def new_team():
 		create_roster.wm_attributes('-topmost', 1)
 		ttk.Label(create_roster, text=init_team_name).pack(side="left", padx=10)
 		new_team_listbox = Listbox(create_roster)
-		new_team_listbox.pack(side="left", padx=10, pady=10)
+		new_team_listbox.pack(side="left",
+			padx=10,pady=10)
 
 		ttk.Label(create_roster, text="Player Name:").pack()
 		get_name = ttk.Entry(create_roster)
