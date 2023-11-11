@@ -120,7 +120,7 @@ ttk.Button(text="Kill", command=kill_team).pack(side="top", padx=50,)
 ttk.Button(text="Quit", command=quit).pack(side="right", padx=50)
 
 #  add logo
-logo = PhotoImage(file='resized.png')
+logo = PhotoImage(file='logo.png')
 logo_label = ttk.Label(image=logo)
 logo_label.pack(side='left', padx=40)
 
