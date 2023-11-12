@@ -105,7 +105,14 @@ def kill_team():
 	pass
 
 def edit_team():
-	pass
+	#  get selected team
+	selected_index = listbox.curselection()
+	if not selected_index:
+		return
+	target_team_name = listbox.get(selected_index[0])
+	for team in teams:
+		if hasattr(team, 'name') and getattr(team, 'name') == target_team_name:
+			pass
 
 def pause_team():
 	pass
