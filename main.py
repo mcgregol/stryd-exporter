@@ -105,7 +105,37 @@ def kill_team():
 	pass
 
 def edit_team():
-	pass
+	today = datetime.date.today()
+	
+	def apply_edits():
+		pass
+
+	def set_save_path():
+		pass
+
+	edit_popup = Toplevel(root)
+	edit_popup.geometry("900x500")
+	edit_popup.title("Edit Team")
+	ttk.Label(edit_popup, text="Team name:").pack(pady=10)
+	team_name_entry = ttk.Entry(edit_popup)
+	team_name_entry.pack()
+	save_path_label = ttk.Label(edit_popup, text="Saving to: undefined")
+	save_path_label.pack(pady=10)
+	ttk.Button(edit_popup, text="Set save path", command=set_save_path).pack()
+	#ttk.Label(edit_popup, text="Timer incrimentation(hrs):").pack()
+	#team_timer_entry = ttk.Entry(edit_popup)
+	ttk.Label(edit_popup, text="Set date range:").pack(pady=20)
+	start_cal = Calendar(edit_popup, selectmode='day',
+		year=today.year,
+		month=today.month,
+		day=today.day)
+	start_cal.pack(side='left', padx=50)
+	end_cal = Calendar(edit_popup, selectmode='day',
+		year=today.year,
+		month=today.month,
+		day=today.day)
+	end_cal.pack(side='right', padx=50)
+	ttk.Button(edit_popup, text="Save Edits", command=apply_edits).pack(side='bottom', pady=50)
 
 #  change back to pause_team for v2
 def export_team():

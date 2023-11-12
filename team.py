@@ -11,3 +11,13 @@ class Team:
 
 	def export(self):
 		print("YASSSSS")
+
+	def change_name(self, new_name):
+		name = new_name
+
+	def change_dates(self, new_start_date, new_end_date):
+		start_date = new_start_date
+		end_date = new_end_date
+
+	def change_save_path(self, new_save_path):
+		save_path = new_save_path
