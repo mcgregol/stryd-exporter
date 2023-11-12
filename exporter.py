@@ -12,7 +12,7 @@ class Exporter:
 		self.user_pass = user_pass
 		self.date = datetime.date.today()
 
-	def export():
+	def export(self):
 		#  prep selenium
 		options = webdriver.FirefoxOptions()
 		options.set_preference("browser.download.folderList", 2)

@@ -105,6 +105,10 @@ def kill_team():
 	pass
 
 def edit_team():
+	pass
+
+#  change back to pause_team for v2
+def export_team():
 	#  get selected team
 	selected_index = listbox.curselection()
 	if not selected_index:
@@ -112,10 +116,7 @@ def edit_team():
 	target_team_name = listbox.get(selected_index[0])
 	for team in teams:
 		if hasattr(team, 'name') and getattr(team, 'name') == target_team_name:
-			pass
-
-def pause_team():
-	pass
+			team.export()
 
 def quit():
 	root.destroy()
@@ -135,7 +136,8 @@ listbox.place(x=40, y=80)
 #  add buttons
 ttk.Button(text="New", command=new_team).pack(side="top", padx=50, pady=50)
 ttk.Button(text="Edit", command=edit_team).pack(side="top", padx=50)
-ttk.Button(text="Pause", command=pause_team).pack(side="top", padx=50, pady=50)
+#ttk.Button(text="Pause", command=pause_team).pack(side="top", padx=50, pady=50)
+ttk.Button(text="Export", command=export_team).pack(side="top", padx=50, pady=50)
 ttk.Button(text="Kill", command=kill_team).pack(side="top", padx=50,)
 ttk.Button(text="Quit", command=quit).pack(side="right", padx=50)
 

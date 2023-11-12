@@ -1,3 +1,4 @@
+from exporter import Exporter
 import datetime
 
 class Team:
@@ -7,3 +8,6 @@ class Team:
 		self.start_date = start_date
 		self.end_date = end_date
 		self.save_path = save_path
+
+	def export(self):
+		print("YASSSSS")
