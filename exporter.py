@@ -6,10 +6,11 @@ from selenium.webdriver.support import expected_conditions as EC
 import datetime, time
 
 class Exporter:
-	def __init__(self, player_name, user_email, user_pass):
+	def __init__(self, player_name, user_email, user_pass, save_path):
 		self.player_name = player_name
 		self.user_email = user_email
 		self.user_pass = user_pass
+		self.save_path = save_path
 		self.date = datetime.date.today()
 
 	def export(self):
@@ -49,3 +50,5 @@ class Exporter:
 
 		time.sleep(8)
 		browser.quit()
+	def get_player_name(self):
+		return self.player_name

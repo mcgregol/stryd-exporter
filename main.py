@@ -36,7 +36,7 @@ def new_team():
 
 		def add_player():
 			#  create exporter objects and add to list and add object name to listbox
-			player = Exporter(get_name.get() ,get_email.get(), get_password.get())
+			player = Exporter(get_name.get() ,get_email.get(), get_password.get(), init_save_path)
 			init_team_exporter_list.append(player)
 			new_team_listbox.insert(tk.END, player.player_name)
 			get_name.delete(0, 'end')
