@@ -101,9 +101,6 @@ def new_team():
 	end_cal.pack(side='right', padx=50)
 	ttk.Button(new_popup, text="Create Team & Roster", command=create).pack(side='bottom', pady=50)
 
-def kill_team():
-	pass
-
 def edit_team():
 	today = datetime.date.today()
 	
@@ -147,6 +144,17 @@ def export_team():
 	for team in teams:
 		if hasattr(team, 'name') and getattr(team, 'name') == target_team_name:
 			team.export()
+
+def kill_team():
+	#  get selected team
+	selected_index = listbox.curselection()
+	if not selected_index:
+		return
+	target_team_name = listbox.get(selected_index[0])
+	for team in teams:
+		if hasattr(team, 'name') and getattr(team, 'name') == target_team_name:
+			del team
+			listbox.delete(selected_index[0])
 
 def quit():
 	root.destroy()
