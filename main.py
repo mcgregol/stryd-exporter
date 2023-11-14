@@ -71,6 +71,7 @@ def new_team():
 		ttk.Button(create_roster, text="Save & Close", command=add_team).pack(padx=10, pady=10)
 
 	def set_save_path():
+		nonlocal init_save_path
 		directory = filedialog.askdirectory()
 		if directory:
 			save_path_label.config(text="Saving to: " + directory)
@@ -102,6 +103,16 @@ def new_team():
 	ttk.Button(new_popup, text="Create Team & Roster", command=create).pack(side='bottom', pady=50)
 
 def edit_team():
+	#  get selected team
+	selected_index = listbox.curselection()
+	if not selected_index:
+		return
+	target_team_name = listbox.get(selected_index[0])
+
+	for team in teams:
+		if hasattr(team, 'name') and getattr(team, 'name') == target_team_name:
+			target_team = team
+
 	today = datetime.date.today()
 	
 	def apply_edits():
@@ -110,13 +121,31 @@ def edit_team():
 	def set_save_path():
 		pass
 
+	def edit_roster():
+		def edit_player():
+			pass
+
+		edit_roster_popup = Toplevel(edit_popup)
+		edit_roster_popup.title("Edit Roster")
+		edit_roster_popup.wm_attributes('-topmost', 1)
+		ttk.Label(edit_roster_popup, text=target_team.name).pack(side="left", padx=10)
+		existing_teams_listbox = Listbox(edit_roster_popup)
+		existing_teams_listbox.pack(side="left",
+			padx=10, pady=10)
+		ttk.Button(edit_roster_popup, text="Save & Close", command=edit_popup.destroy).pack(side="right", padx=10)
+		ttk.Button(edit_roster_popup, text="Edit Player", command=edit_player).pack(side="right", padx=10)
+		# add players to listbox from target_team
+		for player in target_team.exporter_list:
+			existing_teams_listbox.insert(tk.END, player.player_name)
+
 	edit_popup = Toplevel(root)
 	edit_popup.geometry("900x500")
 	edit_popup.title("Edit Team")
 	ttk.Label(edit_popup, text="Team name:").pack(pady=10)
 	team_name_entry = ttk.Entry(edit_popup)
+	team_name_entry.insert(0, target_team.name)
 	team_name_entry.pack()
-	save_path_label = ttk.Label(edit_popup, text="Saving to: undefined")
+	save_path_label = ttk.Label(edit_popup, text="Saving to: " + target_team.save_path)
 	save_path_label.pack(pady=10)
 	ttk.Button(edit_popup, text="Set save path", command=set_save_path).pack()
 	#ttk.Label(edit_popup, text="Timer incrimentation(hrs):").pack()
@@ -133,6 +162,7 @@ def edit_team():
 		day=today.day)
 	end_cal.pack(side='right', padx=50)
 	ttk.Button(edit_popup, text="Save Edits", command=apply_edits).pack(side='bottom', pady=50)
+	ttk.Button(edit_popup, text="Edit Roster", command=edit_roster).pack(side='bottom', pady=50)
 
 #  change back to pause_team for v2
 def export_team():
