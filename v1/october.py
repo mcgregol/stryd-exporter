@@ -28,16 +28,22 @@ def export(email, passwd, save_path, days_list):
 		url_parts[-1] = 'calendar'
 		calendar_url = '/'.join(url_parts)
 		browser.get(calendar_url)
-		browser.find_element(By.XPATH, '/html/body/div[1]/div/div/main/div/div/div/div[1]/div/button[1]').click()
-
-		#  locate desired date
+		back_button = WebDriverWait(browser, 10).until(
+			EC.presence_of_element_located((By.XPATH, '/html/body/div[1]/div/div/main/div/div/div/div[1]/div/button[1]')))
+		back_button.click()
 
 		#  open workout options as list
-		ensure_load_workout.find_element(By.CLASS_NAME, 'css-1pwidyo').click()
-		workout_options = browser.find_elements(By.CSS_SELECTOR, '.MuiMenu-list > li')
+		#ensure_load_workout = WebDriverWait(browser, 10).until(
+			#EC.presence_of_element_located((By.CSS_SELECTOR, '.MuiMenu-list > li')))
+		time.sleep(5)
 
-		#  download workout .fit
-		workout_options[1].click()
+		workout_options = browser.find_elements(By.CSS_SELECTOR, 'button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-sizeSmall.css-1pwidyo')
+		for workout in workout_options:
+			workout.click()
+			fit_download_element = WebDriverWait(browser, 10).until(
+				EC.presence_of_element_located((By.XPATH, "//li[contains(., 'Download .fit')]")))
+			fit_download_element.click()
+			browser.switch_to.frame(0)
 
 		time.sleep(8)
 		browser.quit()
