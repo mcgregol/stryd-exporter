@@ -1,5 +1,6 @@
 @ECHO OFF
 
+TITLE Stryd Exporter v1 Setup
 echo Welcome to setup.
 pause
 
